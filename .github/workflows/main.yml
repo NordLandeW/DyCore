@@ -146,12 +146,13 @@ jobs:
 
       - name: Install Strip
         shell: bash
-        run: cmake --install . --strip --prefix instdir
+        run: cmake --install . --strip --prefix "~/instdir"
 
       - name: Pack
         shell: bash
-        working-directory: instdir
+        working-directory: ~/instdir
         run: |
+          cd ~/instdir
           ls -laR
           ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} .
       - name: Upload
