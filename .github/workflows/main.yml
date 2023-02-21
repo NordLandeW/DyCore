@@ -6,10 +6,10 @@ name: CMake Build Matrix
 # Controls when the action will run. Triggers the workflow on push
 on: 
   push:
+    branches: [ "main" ]
   pull_request:
-  release:
-    # tags:
-    # - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    branches: [ "main" ]
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,17 +22,6 @@ jobs:
       fail-fast: false
       matrix:
         config: 
-        - {
-            name: "Windows Latest MSVC",
-            os: windows-latest,
-            artifact: "windows_msvc.7z",
-            build_type: "Release",
-            cc: "cl",
-            cxx: "cl",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
-            archiver: "7z a",
-            generators: "Visual Studio 16 2019"
-          }
         - {
             name: "Windows Latest MinGW",
             os: windows-latest,
@@ -157,7 +146,7 @@ jobs:
 
       - name: Install Strip
         shell: bash
-        run: cmake --install . --strip
+        run: cmake --install . --strip --prefix instdir
 
       - name: Pack
         shell: bash
