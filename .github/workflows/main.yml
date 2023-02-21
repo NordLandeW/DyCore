@@ -139,20 +139,19 @@ jobs:
             -B . \
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
-            -DCMAKE_INSTALL_PREFIX:PATH=instdir
+            -DCMAKE_INSTALL_PREFIX=instdir
       - name: Build
         shell: bash
         run: cmake --build . --config ${{ matrix.config.build_type }}
 
       - name: Install Strip
         shell: bash
-        run: cmake --install . --strip --prefix "~/instdir"
+        run: cmake --install . --strip
 
       - name: Pack
         shell: bash
-        working-directory: ~/instdir
+        working-directory: instdir
         run: |
-          cd ~/instdir
           ls -laR
           ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} .
       - name: Upload
