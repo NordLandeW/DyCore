@@ -38,3 +38,16 @@ DYCORE_API const char* DyCore_delaunator(char* in_struct) {
 
 	return _return_buffer;
 }
+
+DYCORE_API const char* DyCore_advancedExpr(char* in_prop, char* LuaProgram) {
+	json j = json::parse(in_prop);
+
+	lua_State* l = luaL_newstate();
+	if (luaL_loadstring(l, LuaProgram)) {
+		return "-1";
+	}
+
+
+	json r = json();
+	
+}

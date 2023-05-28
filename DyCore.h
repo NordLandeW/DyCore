@@ -6,6 +6,7 @@
 #include "pugixml.hpp"
 #include "delaunator.hpp"
 #include <iostream>
+#include "lua/lua.hpp"
 
 #if !defined( _MSC_VER)
 #define EXPORTED_FN __attribute__((visibility("default")))
